@@ -1,10 +1,5 @@
 @import 'tailwindcss';
-
-@plugin 'tailwindcss-animate';
-
-@custom-variant dark (&:is(.dark *));
 @import 'tailwindcss/preflight';
-@tailwind utilities;
 
 /* Variables CSS globales */
 :root {
@@ -85,37 +80,91 @@ body {
 }
 
 /* Utilidades personalizadas */
-@layer utilities {
+.wrapper {
+  max-width: var(--container-7xl);
+  margin-inline: auto;
+  padding: calc(var(--spacing) * 5);
+  width: 100%;
+}
+@media (width >= 48rem /* 768px */) {
   .wrapper {
-    @apply max-w-7xl mx-auto p-5 md:px-10 w-full;
-  }
-
-  .flex-start {
-    @apply flex justify-start items-center;
-  }
-
-  .flex-center {
-    @apply flex justify-center items-center;
-  }
-
-  .flex-between {
-    @apply flex justify-between items-center;
-  }
-
-  .h1-bold {
-    @apply font-bold text-3xl lg:text-4xl;
-  }
-
-  .h2-bold {
-    @apply font-bold text-2xl lg:text-3xl;
-  }
-
-  .h3-bold {
-    @apply font-bold text-xl lg:text-2xl;
+    padding-inline: calc(var(--spacing) * 10) /* 2.5rem = 40px */;
   }
 }
 
-@theme inline {
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.h1-bold {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-3xl) /* 1.875rem = 30px */;
+  line-height: var(
+    --tw-leading,
+    var(--text-3xl--line-height) /* calc(2.25 / 1.875) ≈ 1.2 */
+  );
+}
+@media (width >= 64rem /* 1024px */) {
+  .h1-bold {
+    font-size: var(--text-4xl) /* 2.25rem = 36px */;
+    line-height: var(
+      --tw-leading,
+      var(--text-4xl--line-height) /* calc(2.5 / 2.25) ≈ 1.1111 */
+    );
+  }
+}
+
+.h2-bold {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-2xl) /* 1.5rem = 24px */;
+  line-height: var(
+    --tw-leading,
+    var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */
+  );
+}
+@media (width >= 64rem /* 1024px */) {
+  .h2-bold {
+    font-size: var(--text-3xl) /* 1.875rem = 30px */;
+    line-height: var(
+      --tw-leading,
+      var(--text-3xl--line-height) /* calc(2.25 / 1.875) ≈ 1.2 */
+    );
+  }
+}
+
+.h3-bold {
+  font-weight: var(--font-weight-bold) /* 700 */;
+  font-size: var(--text-xl) /* 1.25rem = 20px */;
+  line-height: var(
+    --tw-leading,
+    var(--text-xl--line-height) /* calc(1.75 / 1.25) ≈ 1.4 */
+  );
+}
+@media (width >= 64rem /* 1024px */) {
+  .h3-bold {
+    font-size: var(--text-2xl) /* 1.5rem = 24px */;
+    line-height: var(
+      --tw-leading,
+      var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */
+    );
+  }
+}
+
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -154,11 +203,31 @@ body {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    box-sizing: content-box; /* Cambia de border-box a content-box */
+    margin: 0.5rem; /* Agrega un margen personalizado */
+    padding: 0.5rem;
+    border: none !important;
+  }
+}
+
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--color-border);
+    outline-color: color-mix(
+      in oklab,
+      var(--color-ring) /* var(--ring) */ 50%,
+      transparent
+    );
+    border: none !important;
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background) /* var(--background) */;
+    color: var(--color-foreground) /* var(--foreground) */;
   }
 }
