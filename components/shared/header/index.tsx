@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ShoppingCart, UserIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { APP_NAME } from '@/lib/constants';
+import ModeToogle from './ModeToogle';
 
 function Header() {
   return (
@@ -23,12 +24,13 @@ function Header() {
           </Link>
         </div>
         <div className='flex gap-10'>
+          <ModeToogle />
           <Button asChild variant='ghost'>
             <Link href='/cart'>
               <ShoppingCart /> Cart
             </Link>
           </Button>
-          <Button asChild variant='ghost'>
+          <Button asChild variant='destructive'>
             <Link href='/sign-in'>
               <UserIcon /> Sign In
             </Link>
