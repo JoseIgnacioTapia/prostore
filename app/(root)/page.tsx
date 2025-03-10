@@ -2,7 +2,11 @@ export const metadata = {
   title: 'Home',
 };
 
-function Homepage() {
+// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function Homepage() {
+  // await delay(2000);
+
   return <div>Prostore</div>;
 }
 
