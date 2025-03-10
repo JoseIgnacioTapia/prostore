@@ -1,3 +1,6 @@
+import ProductList from '@/components/shared/product/ProductList';
+import sampleData from '@/db/sample-data';
+
 export const metadata = {
   title: 'Home',
 };
@@ -7,7 +10,15 @@ export const metadata = {
 async function Homepage() {
   // await delay(2000);
 
-  return <div>Prostore</div>;
+  return (
+    <>
+      <ProductList
+        data={sampleData.products}
+        title='Newest Arrivals'
+        limit={4}
+      />
+    </>
+  );
 }
 
 export default Homepage;
