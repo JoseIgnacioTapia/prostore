@@ -224,7 +224,7 @@ layer base {
       var(--color-ring) /* var(--ring) */ 50%,
       transparent
     );
-    border: none !important;
+    /* border: none !important; */
   }
   body {
     background-color: var(--color-background) /* var(--background) */;
