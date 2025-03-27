@@ -1,6 +1,5 @@
 import { getLatestProducts } from '@/lib/actions/product.actions';
 import ProductList from '@/components/shared/product/ProductList';
-import sampleData from '@/db/sample-data';
 
 export const metadata = {
   title: 'Home',
@@ -11,6 +10,7 @@ export const metadata = {
 async function Homepage() {
   // await delay(2000);
   const latestProducts = await getLatestProducts();
+  console.log(latestProducts);
 
   return (
     <>
