@@ -14,7 +14,7 @@ import { UserIcon } from 'lucide-react';
 async function UserButton() {
   const session = await auth();
 
-  if (!session) {
+  if (!session || !session.user) {
     return (
       <Button asChild>
         <Link href='/sign-in'>
