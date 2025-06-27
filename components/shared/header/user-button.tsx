@@ -24,7 +24,7 @@ async function UserButton() {
     );
   }
 
-  const firstInitial = session.user.name?.charAt(0).toUpperCase() || 'U';
+  const firstInitial = session.user?.name?.charAt(0).toUpperCase() || 'U';
 
   return (
     <div className='flex gap-2 items-center'>
