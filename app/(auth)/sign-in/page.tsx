@@ -3,11 +3,12 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardContent
+  CardContent,
 } from '@/components/ui/card';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import CredentialsSignInForm from './credentials-signin-form';
 import { APP_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ function SignInPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className='space-y-4'>
-          {/* Form here */}
+          <CredentialsSignInForm />
         </CardContent>
       </Card>
     </div>
