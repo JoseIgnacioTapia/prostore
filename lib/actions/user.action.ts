@@ -44,6 +44,10 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
       confirmPassword: formData.get('confirmPassword'),
     });
 
+    if (user.password !== user.confirmPassword) {
+      return { success: false, message: 'Passwords do not match' };
+    }
+
     const plainPassword = user.password;
 
     user.password = hashSync(user.password, 10);
@@ -58,9 +62,10 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
 
     await signIn('credentials', {
       email: user.email,
+      password: plainPassword,
     });
 
-    return { success: true, message: 'User register succeddfully' };
+    return { success: true, message: 'User register successfully' };
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;
