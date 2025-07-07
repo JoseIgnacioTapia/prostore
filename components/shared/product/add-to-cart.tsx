@@ -13,29 +13,31 @@ function AddToCart({ item }: { item: CartItem }) {
     const res = await addItemToCart(item);
 
     if (!res.success) {
-      toast('Error', {
+      toast.error('Error', {
         description: String(res.message || 'Something went wrong'),
         action: {
-          label: 'Undo',
+          label: 'Close',
           onClick: () => console.log('Undo'),
+          className: 'bg-red-800 text-white hover:bg-red-900',
         },
       });
       return;
     }
 
     // Handle success add to cart
-    toast('Great!', {
+    toast.success('Great!', {
       description: String(`${item.name} added to cart`),
       action: {
         label: 'Go To Cart',
         onClick: () => router.push('/cart'),
+        className: 'bg-green-800 text-white hover:bg-green-900',
       },
     });
   };
 
   return (
     <Button className='w-full' type='button' onClick={handleAddToCart}>
-      Add To Cart
+      <Plus /> Add To Cart
     </Button>
   );
 }
