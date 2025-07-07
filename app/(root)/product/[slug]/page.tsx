@@ -1,10 +1,10 @@
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { notFound } from 'next/navigation';
 import { getProductBySlug } from '@/lib/actions/product.actions';
 import ProductPrice from '@/components/shared/product/ProductPrice';
 import ProductImages from '@/components/shared/product/ProductImages';
+import AddToCart from '@/components/shared/product/add-to-cart';
 
 type Params = Promise<{ slug: string }>;
 
@@ -64,7 +64,16 @@ async function ProductDetailsPage({ params }: { params: Params }) {
                 </div>
                 {product.stock > 0 && (
                   <div className='flex-center'>
-                    <Button className='w-full'>Add to Cart</Button>
+                    <AddToCart
+                      item={{
+                        productId: product.id,
+                        name: product.name,
+                        slug: product.slug,
+                        price: product.price,
+                        qty: 1,
+                        image: product.images![0],
+                      }}
+                    />
                   </div>
                 )}
               </CardContent>
