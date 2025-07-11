@@ -26,7 +26,7 @@ function AddToCart({ item }: { item: CartItem }) {
 
     // Handle success add to cart
     toast.success('Great!', {
-      description: String(`${item.name} added to cart`),
+      description: String(`${res.message || 'Item added to cart'}`),
       action: {
         label: 'Go To Cart',
         onClick: () => router.push('/cart'),
