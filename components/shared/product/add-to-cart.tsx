@@ -18,7 +18,7 @@ function AddToCart({ item }: { item: CartItem }) {
         action: {
           label: 'Close',
           onClick: () => console.log('Undo'),
-          className: 'bg-red-800 text-white hover:bg-red-900',
+          // className: 'bg-red-800 text-white hover:bg-red-900',
         },
       });
       return;
@@ -30,7 +30,7 @@ function AddToCart({ item }: { item: CartItem }) {
       action: {
         label: 'Go To Cart',
         onClick: () => router.push('/cart'),
-        className: 'bg-green-800 text-white hover:bg-green-900',
+        // className: 'bg-green-800 text-white hover:bg-green-900',
       },
     });
   };
