@@ -107,7 +107,7 @@ export const config = {
           },
         });
 
-        // Set newly generated sessionCardId in the response cookies
+        // Set newly generated sessionCartId in the response cookies
         response.cookies.set('sessionCartId', sessionCartId);
 
         return response;
