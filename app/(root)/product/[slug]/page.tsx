@@ -5,6 +5,7 @@ import { getProductBySlug } from '@/lib/actions/product.actions';
 import ProductPrice from '@/components/shared/product/ProductPrice';
 import ProductImages from '@/components/shared/product/ProductImages';
 import AddToCart from '@/components/shared/product/add-to-cart';
+import { getMyCart } from '@/lib/actions/cart.action';
 
 type Params = Promise<{ slug: string }>;
 
@@ -13,6 +14,8 @@ async function ProductDetailsPage({ params }: { params: Params }) {
 
   const product = await getProductBySlug(slug);
   if (!product) notFound();
+
+  const cart = await getMyCart();
 
   return (
     <>
@@ -65,6 +68,7 @@ async function ProductDetailsPage({ params }: { params: Params }) {
                 {product.stock > 0 && (
                   <div className='flex-center'>
                     <AddToCart
+                      cart={cart}
                       item={{
                         productId: product.id,
                         name: product.name,

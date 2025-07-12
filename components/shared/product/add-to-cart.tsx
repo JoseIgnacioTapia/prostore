@@ -1,12 +1,12 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { Plus } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 import { toast } from 'sonner';
-import { addItemToCart } from '@/lib/actions/cart.action';
-import { CartItem } from '@/types';
+import { addItemToCart, removeItemFromCart } from '@/lib/actions/cart.action';
+import { Cart, CartItem } from '@/types';
 
-function AddToCart({ item }: { item: CartItem }) {
+function AddToCart({ cart, item }: { cart?: Cart; item: CartItem }) {
   const router = useRouter();
 
   const handleAddToCart = async () => {
@@ -35,7 +35,45 @@ function AddToCart({ item }: { item: CartItem }) {
     });
   };
 
-  return (
+  // Handle remove from cart
+  const handleRemoveFromCart = async () => {
+    const res = await removeItemFromCart(item.productId);
+
+    if (!res.success) {
+      toast.error('Error', {
+        description: String(res.message || 'Something went wrong'),
+        action: {
+          label: 'Close',
+          onClick: () => console.log('Undo'),
+        },
+      });
+      return;
+    }
+
+    // Handle success remove from cart
+    toast.success('Removed!', {
+      description: String(`${res.message || 'Item removed from cart'}`),
+    });
+
+    router.refresh();
+  };
+
+  // Check if item is in cart
+  const existItem =
+    cart && cart.items.find((x) => x.productId === item.productId);
+  console.log('existItem', existItem);
+
+  return existItem ? (
+    <div className='flex items-center gap-4'>
+      <Button type='button' variant='outline' onClick={handleRemoveFromCart}>
+        <Minus className='h-4 w-4' />
+      </Button>
+      <span className='px-2'>{existItem.qty}</span>
+      <Button type='button' variant='outline' onClick={handleAddToCart}>
+        <Plus className='h-4 w-4' />
+      </Button>
+    </div>
+  ) : (
     <Button className='w-full' type='button' onClick={handleAddToCart}>
       <Plus /> Add To Cart
     </Button>
